@@ -4,7 +4,7 @@ const all = (promises) => {
   }
 
   let completedCount = 0;
-  let results = [];
+  const results = [];
 
   return new Promise((resolve, reject) => {
     promises.forEach((promise, index) => {

@@ -6,7 +6,7 @@ describe('all', () => {
     expect(actual).toEqual([]);
   });
 
-  it('works with promises of fulfilled status', async () => {
+  it('all of the promises was fulfilled', async () => {
     const p1 = Promise.resolve(3);
     const p2 = 1337;
     const p3 = new Promise((resolve) => {
@@ -17,7 +17,7 @@ describe('all', () => {
     expect(actual).toEqual([3, 1337, 'foo']);
   });
 
-  it('fail if there is a promise with the rejected status', async () => {
+  it('all promises were rejected', async () => {
     const p1 = new Promise((resolve) => {
       setTimeout(resolve, 300, "one");
     });

@@ -14,10 +14,10 @@ const all = (promises) => {
           completedCount += 1;
 
           if (completedCount === promises.length) {
-            resolve(results)
+            resolve(results);
           }
         })
-        .catch(reject)
+        .catch(reject);
     });
   });
 };

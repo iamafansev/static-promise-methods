@@ -14,9 +14,8 @@ const any = (promises) => {
         if (rejectedCount === promises.length) {
           reject(rejectedPromises);
         }
-      })
-    );
-  }); 
+      }));
+  });
 };
 
 export default any;

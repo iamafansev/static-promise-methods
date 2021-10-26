@@ -10,7 +10,7 @@ describe('all', () => {
     const p1 = Promise.resolve(3);
     const p2 = 1337;
     const p3 = new Promise((resolve) => {
-      setTimeout(resolve, 100, "foo");
+      setTimeout(resolve, 100, 'foo');
     });
 
     const actual = await all([p1, p2, p3]);
@@ -19,7 +19,7 @@ describe('all', () => {
 
   it('all promises were rejected', async () => {
     const p1 = new Promise((resolve) => {
-      setTimeout(resolve, 300, "one");
+      setTimeout(resolve, 300, 'one');
     });
     const p2 = new Promise((resolve, reject) => {
       setTimeout(reject, 200, 'reject');

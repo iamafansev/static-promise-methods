@@ -1,12 +1,12 @@
 import all from '../src/all';
 
 describe('all', () => {
-  it('empty list', async () => {
+  it('works with empty list', async () => {
     const actual = await all([]);
     expect(actual).toEqual([]);
   });
 
-  it('list with successful promises', async () => {
+  it('works with promises of fulfilled status', async () => {
     const p1 = Promise.resolve(3);
     const p2 = 1337;
     const p3 = new Promise((resolve) => {
@@ -17,7 +17,7 @@ describe('all', () => {
     expect(actual).toEqual([3, 1337, 'foo']);
   });
 
-  it('fail with error', async () => {
+  it('fail if there is a promise with the rejected status', async () => {
     const p1 = new Promise((resolve) => {
       setTimeout(resolve, 300, "one");
     });

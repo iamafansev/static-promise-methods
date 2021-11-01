@@ -1,5 +1,16 @@
 import any from '../src/any';
 
+class NoErrorThrownError extends Error {}
+
+const getError = async (call) => {
+  try {
+    await call();
+    throw new NoErrorThrownError();
+  } catch (error) {
+    return error;
+  }
+};
+
 describe('any', () => {
   it('any of the promises was fulfilled', async () => {
     const p1 = Promise.reject(new Error('First error'));
@@ -15,7 +26,14 @@ describe('any', () => {
     const p2 = new Promise((resolve, reject) => setTimeout(reject, 200, new Error('Second error')));
     const p3 = Promise.reject(new Error('Third error'));
 
-    const expected = [new Error('First error'), new Error('Second error'), new Error('Third error')];
-    return expect(any([p1, p2, p3])).rejects.toEqual(expected);
+    const errors = [new Error('First error'), new Error('Second error'), new Error('Third error')];
+
+    const actualError = await getError(() => any([p1, p2, p3]));
+
+    expect(actualError).toBeInstanceOf(AggregateError);
+    expect(actualError).toEqual(expect.objectContaining({
+      errors,
+      message: 'All promises were rejected',
+    }));
   });
 });

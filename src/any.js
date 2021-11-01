@@ -1,3 +1,5 @@
+const ERROR_MESSAGE = 'All promises were rejected';
+
 const any = (promises) => {
   let rejectedCount = 0;
   const rejectedPromises = [];
@@ -12,7 +14,8 @@ const any = (promises) => {
         rejectedCount += 1;
 
         if (rejectedCount === promises.length) {
-          reject(rejectedPromises);
+          const aggregateError = new AggregateError(rejectedPromises, ERROR_MESSAGE);
+          reject(aggregateError);
         }
       }));
   });
